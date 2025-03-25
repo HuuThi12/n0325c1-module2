@@ -13,7 +13,7 @@ public class Main {
 
         while (true) {
             int choose;
-            do {
+//            do {
                 System.out.println("==== CHƯƠNG TRÌNH QUẢN LÝ ĐIỆN THOẠI ====");
                 System.out.println("1. Xem danh sách điện thoại");
                 System.out.println("2. Thêm mới");
@@ -58,7 +58,7 @@ public class Main {
                         System.out.println("Lựa chọn không hợp lệ! Xin vui lòng chọn lại!");
 
                 }
-            } while ((choose < 1) || (choose > 9));
+//            } while ((choose < 1) || (choose > 9));
         }
 
 
