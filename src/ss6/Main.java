@@ -1,6 +1,6 @@
 package ss6;
 
-import ss6.Exercise2.MyLinkedList;
+import ss6.exercise2.MyLinkedList;
 
 public class Main {
     public static void main(String[] args) {
