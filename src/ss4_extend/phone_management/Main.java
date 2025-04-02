@@ -6,25 +6,25 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
 
-    //    static ArrayList<OldPhone> oldPhones = new ArrayList<>();
-//    static ArrayList<NewPhone> newPhones = new ArrayList<>();
-    static ArrayList<Phone> phones = new ArrayList<>();
+    static ArrayList<OldPhone> oldPhones = new ArrayList<>();
+    static ArrayList<NewPhone> newPhones = new ArrayList<>();
+//    static ArrayList<Phone> phones = new ArrayList<>();
 
     static {
         // Thêm điện thoại củ
-        phones.add(new OldPhone("DTC001","Iphone 11 Promax",
+        oldPhones.add(new OldPhone("DTC001","Iphone 11 Promax",
                 1100,10,"Apple", 65,
                 "Đã qua sử dụng, tình trạng tốt"));
 
-        phones.add(new OldPhone("DTC002","Iphone 13 Promax",
+        oldPhones.add(new OldPhone("DTC002","Iphone 13 Promax",
                 1300,20,"Apple", 80,
                 "Đã qua sử dụng, màn hình nứt nhẹ"));
 
         // Thêm điện thoại mới
-        phones.add(new NewPhone("DTM001","Samsung Galaxy s22 ultra",
+        newPhones.add(new NewPhone("DTM001","Samsung Galaxy s22 ultra",
                 2200,10,"Sam sung", 20));
 
-        phones.add(new NewPhone("DTM002","Samsung Galaxy s25 ultra",
+        newPhones.add(new NewPhone("DTM002","Samsung Galaxy s25 ultra",
                 2500,5,"Sam sung", 12));
     }
 
@@ -87,13 +87,13 @@ public class Main {
 
         if (id.startsWith("DTC")) {
             boolean isExitPhone = false;
-            for (Phone phone : phones) {
-                if (phone.getId().equals(id)) {
+            for (OldPhone oldPhone : oldPhones) {
+                if (oldPhone.getId().equals(id)) {
                     isExitPhone = true;
                     System.out.printf("Bạn có muốn xóa điện thoại cũ có mã %s không \n", id);
                     System.out.println("Chọn Yes để xác nhận xóa, No để hủy");
                     if ("yes".equalsIgnoreCase(scanner.nextLine())) {
-                        phones.remove(phone);
+                        oldPhones.remove(oldPhone);
                         System.out.println("Xóa thành công!");
                     } else {
                         System.out.println("Đã hủy việc xóa!");
@@ -106,12 +106,13 @@ public class Main {
             }
         } else if (id.startsWith("DTM")) {
             boolean isExitPhone = false;
-            for (Phone phone : phones) {
-                if (phone.getId().equals(id)) {
+            for (NewPhone newPhone : newPhones) {
+                if (newPhone.getId().equals(id)) {
                     isExitPhone = true;
                     System.out.printf("Bạn có muốn xóa điện thoại mới có mã %s không \n", id);
                     System.out.println("Chọn yes để xác nhận xóa, No để hủy");
                     if ("yes".equalsIgnoreCase(scanner.nextLine())) {
+                        newPhones.remove(newPhone);
                         System.out.println("Đã xóa thành công!");
                     } else {
                         System.out.println("Đã hủy việc xóa");
@@ -134,27 +135,43 @@ public class Main {
         if (id.startsWith("DTC")) {
             // isExist: Tồn tại
             boolean isExistOldPhone = false;
-            for (int i = 0; i < phones.size(); i++) {
-                if (phones.get(i).getId().equals(id) & phones.get(i) instanceof OldPhone) {
+            for (OldPhone oldPhone : oldPhones) {
+                if (oldPhone.getId().equals(id)) {
                     isExistOldPhone = true;
-                    phones.get(i).input();
+                    oldPhone.input();
                     System.out.println("Cập nhật thành công");
                     break;
                 }
             }
+//            for (int i = 0; i < phones.size(); i++) {
+//                if (phones.get(i).getId().equals(id) & phones.get(i) instanceof OldPhone) {
+//                    isExistOldPhone = true;
+//                    phones.get(i).input();
+//                    System.out.println("Cập nhật thành công");
+//                    break;
+//                }
+//            }
             if (!isExistOldPhone) {
                 System.out.println("Không tìm thấy Id muốn cập nhật");
             }
         } else if (id.startsWith("DTM")) {
             boolean isExistNewPhone = false;
-            for (int i = 0; i < phones.size(); i++) {
-                if (phones.get(i).getId().equals(id)) {
+            for (NewPhone newPhone : newPhones) {
+                if (newPhone.getId().equals(id)) {
                     isExistNewPhone = true;
-                    phones.get(i).input();
+                    newPhone.input();
                     System.out.println("Cập nhật thành công");
                     break;
                 }
             }
+//            for (int i = 0; i < phones.size(); i++) {
+//                if (phones.get(i).getId().equals(id)) {
+//                    isExistNewPhone = true;
+//                    phones.get(i).input();
+//                    System.out.println("Cập nhật thành công");
+//                    break;
+//                }
+//            }
             if (!isExistNewPhone) {
                 System.out.println("Không tìm thấy Id muốn cập nhật");
             }
@@ -236,46 +253,49 @@ public class Main {
                 System.out.println("Nhập vào lựa chọn của bạn");
                 choose = Integer.parseInt(scanner.nextLine());
                 // lấy ra danh sách điện thoại mới từ danh sách điện thoại
-                ArrayList<NewPhone> newPhones = new ArrayList<>();
+//                ArrayList<NewPhone> newPhones = new ArrayList<>();
                 switch (choose) {
                     case 1:
-                        System.out.println("Nhập vào giá bạn muốn tìm: ");
-                        System.out.println("Nhập vào giá từ: ");
-                        int priceFrom = Integer.parseInt(scanner.nextLine());
-
-                        System.out.println("Nhập vào giá đến");
-                        int priceTo = Integer.parseInt(scanner.nextLine());
-
-                        int count = 1;
-                        for (Phone phone : newPhones) {
-                            if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào giá bạn muốn tìm: ");
+//                        System.out.println("Nhập vào giá từ: ");
+//                        int priceFrom = Integer.parseInt(scanner.nextLine());
+//
+//                        System.out.println("Nhập vào giá đến");
+//                        int priceTo = Integer.parseInt(scanner.nextLine());
+//
+//                        int count = 1;
+//                        for (Phone phone : newPhones) {
+//                            if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
                         break;
                     case 2:
-                        System.out.println("Nhập vào tên bạn muốn tìm");
-                        String name = scanner.nextLine();
-
-                        count = 1;
-                        for (Phone phone : newPhones) {
-                            if (phone.getName().contains(name)) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào tên bạn muốn tìm");
+//                        String name = scanner.nextLine();
+//
+//                        count = 1;
+//                        for (Phone phone : newPhones) {
+//                            if (phone.getName().contains(name)) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
                         break;
                     case 3:
-                        System.out.println("Nhập vào tên hãng bạn muốn tìm: ");
-                        String manuFactuner = scanner.nextLine();
-                        count = 1;
-                        for (Phone phone : newPhones) {
-                            if (phone.getManufacturer().contains(manuFactuner)) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào tên hãng bạn muốn tìm: ");
+//                        String manuFactuner = scanner.nextLine();
+//                        count = 1;
+//                        for (Phone phone : newPhones) {
+//                            if (phone.getManufacturer().contains(manuFactuner)) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
                         break;
                     case 4:
                         return;
@@ -300,47 +320,50 @@ public class Main {
                 choose = Integer.parseInt(scanner.nextLine());
 
                 // lấy ra danh sách điện thoại củ từ danh sách điện thoại
-                ArrayList<OldPhone> oldPhones = new ArrayList<>();
+//                ArrayList<OldPhone> oldPhones = new ArrayList<>();
                 switch (choose) {
                     case 1:
-                        System.out.println("Nhập vào giá muốn tìm :");
-                        System.out.println("Nhập vào giá từ: ");
-                        int priceFrom = Integer.parseInt(scanner.nextLine());
-
-                        System.out.println("Nhập vào giá đến: ");
-                        int priceTo = Integer.parseInt(scanner.nextLine());
-
-                        int count = 1;
-                        for (Phone phone : oldPhones) {
-                            // Kiểm tra xem giá đó có nằm trong khoảng người dùng nhập vào (priceFrom đến priceTo).
-                            if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào giá muốn tìm :");
+//                        System.out.println("Nhập vào giá từ: ");
+//                        int priceFrom = Integer.parseInt(scanner.nextLine());
+//
+//                        System.out.println("Nhập vào giá đến: ");
+//                        int priceTo = Integer.parseInt(scanner.nextLine());
+//
+//                        int count = 1;
+//                        for (Phone phone : oldPhones) {
+//                            // Kiểm tra xem giá đó có nằm trong khoảng người dùng nhập vào (priceFrom đến priceTo).
+//                            if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
                         break;
                     case 2:
-                        System.out.println("Nhập vào tên cần tìm: ");
-                        String name = scanner.nextLine();
-                        count = 1;
-                        for (Phone phone : phones) {
-                            // Phương thức contains kiểm tra nếu phone.getName() có chứa chuỗi của name => true
-                            if (phone.getName().contains(name)) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
-                        break;
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào tên cần tìm: ");
+//                        String name = scanner.nextLine();
+//                        count = 1;
+//                        for (Phone phone : phones) {
+//                            // Phương thức contains kiểm tra nếu phone.getName() có chứa chuỗi của name => true
+//                            if (phone.getName().contains(name)) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
+//                        break;
                     case 3:
-                        System.out.println("Nhập vào hãng điện thoại cần tìm: ");
-                        String manuFactuner = scanner.nextLine();
-                        count = 1;
-                        for (Phone phone : phones) {
-                            if (phone.getManufacturer().contains(manuFactuner)) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào hãng điện thoại cần tìm: ");
+//                        String manuFactuner = scanner.nextLine();
+//                        count = 1;
+//                        for (Phone phone : phones) {
+//                            if (phone.getManufacturer().contains(manuFactuner)) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
                         break;
                     case 4:
                         return;
@@ -367,43 +390,46 @@ public class Main {
                 choose = Integer.parseInt(scanner.nextLine());
                 switch (choose) {
                     case 1:
-                        System.out.println("Nhập vào giá bạn muốn tìm: ");
-                        System.out.println("Nhập vào giá từ: ");
-                        int priceFrom = Integer.parseInt(scanner.nextLine());
-
-                        System.out.println("Nhập vào giá đến");
-                        int priceTo = Integer.parseInt(scanner.nextLine());
-
-                        int count = 1;
-                        for (Phone phone : phones) {
-                            if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào giá bạn muốn tìm: ");
+//                        System.out.println("Nhập vào giá từ: ");
+//                        int priceFrom = Integer.parseInt(scanner.nextLine());
+//
+//                        System.out.println("Nhập vào giá đến");
+//                        int priceTo = Integer.parseInt(scanner.nextLine());
+//
+//                        int count = 1;
+//                        for (Phone phone : phones) {
+//                            if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
                         break;
                     case 2:
-                        System.out.println("Nhập vào tên bạn muốn tìm");
-                        String name = scanner.nextLine();
-
-                        count = 1;
-                        for (Phone phone : phones) {
-                            if (phone.getName().contains(name)) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào tên bạn muốn tìm");
+//                        String name = scanner.nextLine();
+//
+//                        count = 1;
+//                        for (Phone phone : phones) {
+//                            if (phone.getName().contains(name)) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
                         break;
                     case 3:
-                        System.out.println("Nhập vào tên hãng bạn muốn tìm: ");
-                        String manuFactuner = scanner.nextLine();
-                        count = 1;
-                        for (Phone phone : phones) {
-                            if (phone.getManufacturer().contains(manuFactuner)) {
-                                System.out.println("Thông tin điện thoại thứ " + count++);
-                                phone.output();
-                            }
-                        }
+                        // Thực hiện ở bài sau
+//                        System.out.println("Nhập vào tên hãng bạn muốn tìm: ");
+//                        String manuFactuner = scanner.nextLine();
+//                        count = 1;
+//                        for (Phone phone : phones) {
+//                            if (phone.getManufacturer().contains(manuFactuner)) {
+//                                System.out.println("Thông tin điện thoại thứ " + count++);
+//                                phone.output();
+//                            }
+//                        }
                         break;
                     case 4:
                         return;
@@ -416,19 +442,20 @@ public class Main {
     }
 
 
-    private static ArrayList<OldPhone> getOldPhones() {
-        ArrayList<OldPhone> oldPhones = new ArrayList<>();
-        for (int i = 0; i < phones.size(); i++) {
-            if (phones.get(i) instanceof NewPhone) {
-                oldPhones.add((OldPhone) phones.get(i));
-            }
-        }
-        return oldPhones;
-    }
+    // Thực hiện ở bài sau
+//    private static ArrayList<OldPhone> getOldPhones() {
+//        ArrayList<OldPhone> oldPhones = new ArrayList<>();
+//        for (int i = 0; i < phones.size(); i++) {
+//            if (phones.get(i) instanceof NewPhone) {
+//                oldPhones.add((OldPhone) phones.get(i));
+//            }
+//        }
+//        return oldPhones;
+//    }
 
 
     private static String getIdOldPhone() {
-        ArrayList<OldPhone> oldPhones = getOldPhones();
+//        ArrayList<OldPhone> oldPhones = getOldPhones();
         if (oldPhones.size() == 0) {
             return "DTC001";
         }
@@ -449,16 +476,16 @@ public class Main {
 
 
     private static String getIdNewPhone() {
-        if (phones.size() == 0) {
+        if (newPhones.size() == 0) {
             return "DTM001";
         }
 
         // newPhones.get(0).getId(): lấy ra id của điện thoại mới đầu tiên
         // substring(3)); lấy từ vị trí thứ 3 trong chuối "DTC001";
-        int max = Integer.parseInt(phones.get(0).getId().substring(3));
+        int max = Integer.parseInt(newPhones.get(0).getId().substring(3));
 
-        for (int i = 0; i < phones.size(); i++) {
-            int id = Integer.parseInt(phones.get(i).getId().substring(3));
+        for (int i = 0; i < newPhones.size(); i++) {
+            int id = Integer.parseInt(newPhones.get(i).getId().substring(3));
             if (max < id) {
                 max = id;
             }
@@ -484,14 +511,14 @@ public class Main {
                         OldPhone oldPhone = new OldPhone();
                         oldPhone.input();
                         oldPhone.setId(getIdOldPhone());
-                        phones.add(oldPhone);
+                        oldPhones.add(oldPhone);
                         System.out.println("Thêm mới thành công");
                         break;
                     case 2:
                         NewPhone newPhone = new NewPhone();
                         newPhone.input();
                         newPhone.setId(getIdNewPhone());
-                        phones.add(newPhone);
+                        newPhones.add(newPhone);
                         System.out.println("Thêm mới thành công");
                         break;
                     case 3:
@@ -518,29 +545,28 @@ public class Main {
                 switch (choose) {
                     case 1:
                         System.out.println("Thông tin tất cả điện thoại :");
-                        for (int i = 0; i < phones.size(); i++) {
+                        for (int i = 0; i < oldPhones.size(); i++) {
                             System.out.println("Thông tin điện thoại thứ " + (i + 1));
-                            phones.get(i).output();
+                            oldPhones.get(i).output();
+                        }
+
+                        for (int i = 0; i < newPhones.size(); i++) {
+                            System.out.println("Thông tin điện thoại thứ " + (i + 1 + newPhones.size()));
+                            newPhones.get(i).output();
                         }
                         break;
                     case 2:
                         System.out.println("Thông tin điện thoại cũ");
-                        int count = 1;
-                        for (int i = 0; i < phones.size(); i++) {
-                            if (phones.get(i) instanceof OldPhone) {
-                                System.out.println("Thông tin điện thoại cũ thứ " + count++);
-                                phones.get(i).output();
-                            }
+                        for (int i = 0; i < oldPhones.size(); i++) {
+                                System.out.println("Thông tin điện thoại cũ thứ " + ( i + 1));
+                                oldPhones.get(i).output();
                         }
                         break;
                     case 3:
                         System.out.println("Thông tin điện thoại mới");
-                        count = 1;
-                        for (int i = 0; i < phones.size(); i++) {
-                            if (phones.get(i) instanceof NewPhone) {
-                                System.out.println("Thông tin điện thoại mới thứ " + count++);
-                                phones.get(i).output();
-                            }
+                        for (int i = 0; i < newPhones.size(); i++) {
+                                System.out.println("Thông tin điện thoại mới thứ " + ( i + 1));
+                                newPhones.get(i).output();
                         }
                         break;
                     case 4:

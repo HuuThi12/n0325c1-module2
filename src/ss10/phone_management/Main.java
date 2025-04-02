@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
 
-    //    static ArrayList<OldPhone> oldPhones = new ArrayList<>();
-//    static ArrayList<NewPhone> newPhones = new ArrayList<>();
+    static ArrayList<OldPhone> oldPhones = new ArrayList<>();
+    static ArrayList<NewPhone> newPhones = new ArrayList<>();
     static ArrayList<Phone> phones = new ArrayList<>();
 
     static {
